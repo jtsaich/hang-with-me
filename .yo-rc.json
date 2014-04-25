@@ -1,0 +1,25 @@
+{
+  "generator-bbb": {
+    "name": "hangwithme",
+    "testFramework": "jasmine",
+    "moduleStyle": "amd",
+    "indent": {
+      "style": "space",
+      "size": 2
+    },
+    "paths": {
+      "base": ".",
+      "tests": "test",
+      "modules": "app/modules"
+    }
+  },
+  "generator-backbone": {
+    "appPath": "app",
+    "appName": "Hangwithme",
+    "coffee": false,
+    "testFramework": "mocha",
+    "templateFramework": "lodash",
+    "compassBootstrap": true,
+    "includeRequireJS": true
+  }
+}
