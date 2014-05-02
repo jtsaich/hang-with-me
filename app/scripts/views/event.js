@@ -5,23 +5,24 @@ define([
     'underscore',
     'backbone',
     'templates',
-    'models/user'
-], function ($, _, Backbone, JST, UserModel) {
+    'models/event'
+], function ($, _, Backbone, JST, EventModel) {
     'use strict';
 
-    var UserView = Backbone.View.extend({
-
-        template: JST['app/scripts/templates/user.ejs'],
+    var EventView = Backbone.View.extend({
+        template: JST['app/scripts/templates/event.ejs'],
 
         tagName: 'div',
 
-        events: {},
+        className: 'row',
 
+        events: {},
+        
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
             return this;
         }
     });
 
-    return UserView;
+    return EventView;
 });

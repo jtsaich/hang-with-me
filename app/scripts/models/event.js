@@ -6,10 +6,15 @@ define([
 ], function (_, Backbone) {
     'use strict';
 
-    var ApplicationModel = Backbone.Model.extend({
+    var EventModel = Backbone.Model.extend({
         url: '',
 
         defaults: {
+          'name': 'default',
+          'image_url': 'default',
+          'eventName': 'default',
+          'time': 'default',
+          'date': 'default'
         },
 
         validate: function(attrs, options) {
@@ -20,5 +25,5 @@ define([
         }
     });
 
-    return ApplicationModel;
+    return EventModel;
 });

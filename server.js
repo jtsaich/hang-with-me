@@ -10,22 +10,22 @@ var application_root = __dirname,
 var app = express();
 
 //Connect to database
-mongoose.connect( 'mongodb://localhost/library_database' );
+mongoose.connect( 'mongodb://localhost/hang-with-me_database' );
 
 //Schemas
-var Keywords = new mongoose.Schema({
-	keyword: String
-});
-
-var Book = new mongoose.Schema({
-	title: String,
-	author: String,
-	releaseDate: String,
-	keywords: [ Keywords ]
+var User = new mongoose.Schema({
+	username: String,
+	password: String,
+	firstName: String,
+	lastName: String,
+	phone: String,
+	email: String,
+	dateOfBirth: Date,
+	gender: String,
 });
 
 //Models
-var BookModel = mongoose.model( 'Book', Book );
+var UserModel = mongoose.model( 'User', User );
 
 // Configure server
 app.configure( function() {
@@ -39,7 +39,7 @@ app.configure( function() {
 	app.use( app.router );
 
 	//Where to serve static content
-	app.use( express.static( path.join( application_root, 'site') ) );
+	app.use( express.static( path.join( application_root, 'app') ) );
 
 	//Show all errors in development
 	app.use( express.errorHandler({ dumpExceptions: true, showStack: true }));
@@ -47,76 +47,87 @@ app.configure( function() {
 
 // Routes
 app.get( '/api', function( request, response ) {
-	response.send( 'Library API is running' );
+	response.send( 'API is running' );
 });
 
-//Get a list of all books
-app.get( '/api/books', function( request, response ) {
-	return BookModel.find( function( err, books ) {
+//Get a list of all users
+app.get( '/api/users', function( request, response ) {
+	return UserModel.find( function( err, users ) {
 		if( !err ) {
-			return response.send( books );
+			return response.send( users );
 		} else {
 			return console.log( err );
 		}
 	});
 });
 
-//Get a single book by id
-app.get( '/api/books/:id', function( request, response ) {
-	return BookModel.findById( request.params.id, function( err, book ) {
+//Get a single user by id
+app.get( '/api/users/:id', function( request, response ) {
+	return UserModel.findById( request.params.id, function( err, user ) {
 		if( !err ) {
-			return response.send( book );
+			return response.send( user );
 		} else {
 			return console.log( err );
 		}
 	});
 });
 
-//Insert a new book
-app.post( '/api/books', function( request, response ) {
-	var book = new BookModel({
-		title: request.body.title,
-		author: request.body.author,
+//Insert a new user
+app.post( '/api/users', function( request, response ) {
+	var user = new UserModel({
 		releaseDate: request.body.releaseDate,
-		keywords: request.body.keywords
+		username: request.body.username,
+    password: request.body.password,
+    firstName: request.body.firstName,
+    lastName: request.body.lastName,
+    phone: request.body.phone,
+    email: request.body.email,
+    dateOfBirth: request.body.dateOfBirth,
+    gender: request.body.gender
 	});
-	book.save( function( err ) {
+	user.save( function( err ) {
 		if( !err ) {
 			return console.log( 'created' );
 		} else {
 			return console.log( err );
 		}
-		return response.send( book );
+		return response.send( user );
 	});
 });
 
-//Update a book
-app.put( '/api/books/:id', function( request, response ) {
-	console.log( 'Updating book ' + request.body.title );
-	return BookModel.findById( request.params.id, function( err, book ) {
-		book.title = request.body.title;
-		book.author = request.body.author;
-		book.releaseDate = request.body.releaseDate;
-		book.keywords = request.body.keywords;
+//Update a user
+app.put( '/api/users/:id', function( request, response ) {
+	console.log( 'Updating user ' + request.body.title );
+	return UserModel.findById( request.params.id, function( err, user ) {
+		user.releaseDate = request.body.releaseDate,
+		user.username = request.body.username,
+    user.password = request.body.password,
+    user.firstName = request.body.firstName,
+    user.lastName = request.body.lastName,
+    user.phone = request.body.phone,
+    user.email = request.body.email,
+    user.dateOfBirth = request.body.dateOfBirth,
+    user.gender = request.body.gender
 
-		return book.save( function( err ) {
+
+		return user.save( function( err ) {
 			if( !err ) {
-				console.log( 'book updated' );
+				console.log( 'user updated' );
 			} else {
 				console.log( err );
 			}
-			return response.send( book );
+			return response.send( user );
 		});
 	});
 });
 
-//Delete a book
-app.delete( '/api/books/:id', function( request, response ) {
-	console.log( 'Deleting book with id: ' + request.params.id );
-	return BookModel.findById( request.params.id, function( err, book ) {
-		return book.remove( function( err ) {
+//Delete a user
+app.delete( '/api/users/:id', function( request, response ) {
+	console.log( 'Deleting user with id: ' + request.params.id );
+	return UserModel.findById( request.params.id, function( err, user ) {
+		return user.remove( function( err ) {
 			if( !err ) {
-				console.log( 'Book removed' );
+				console.log( 'User removed' );
 				return response.send( '' );
 			} else {
 				console.log( err );
