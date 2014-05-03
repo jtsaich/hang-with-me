@@ -1,9 +1,9 @@
-<form role="form">
-    <div class="form-group">
+<form id="addEvent" role="form">
+    <div id="date-form-group" class="form-group">
         <label for="inputDate">Date</label>
-        <input type="date" class="form-control" id="inputDate">
+        <input type="date" class="form-control">
     </div>
-    <div class="form-group">
+    <div id="time-form-group" class="form-group">
         <label class="checkbox-inline">
             <input type="checkbox" value="morning">Morning</label>
         </label>
@@ -14,19 +14,19 @@
             <input type="checkbox" value="night">Night</label>
         </label>
     </div>
-    <div class="form-group">
+    <div class="form-group activity-form-group">
         <div class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <button id="activity-btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 Pick an activity <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li>Dine out</li>
-                <li>Hangout</li>
-                <li>Coffee</li>
-                <li>Whatever</li>
+                <li><a href="#">Dine out</a></li>
+                <li><a href="#">Hangout</a></li>
+                <li><a href="#">Coffee</a></li>
+                <li><a href="#">Whatever</a></li>
             </ul>
         </div>
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button id="add" type="submit" class="btn btn-default">Submit</button>
 </form>
 

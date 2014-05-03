@@ -7,12 +7,13 @@ define([
     'use strict';
 
     var EventModel = Backbone.Model.extend({
-        url: '',
+        //localStorage: new Backbone.LocalStorage('hangwith
+        //url: '',
 
         defaults: {
           'name': 'default',
           'image_url': 'default',
-          'eventName': 'default',
+          'activity': 'default',
           'time': 'default',
           'date': 'default'
         },
