@@ -5,9 +5,11 @@ define([
     'backbone',
     'models/application',
     'views/application',
+    'routes/authentication',
     'routes/user',
     'routes/event'
-], function ($, Backbone, ApplicationModel, ApplicationView, UserRouter, EventRouter) {
+], function ($, Backbone, ApplicationModel, ApplicationView, 
+    AuthenticationRouter, UserRouter, EventRouter) {
     'use strict';
 
     var ApplicationRouter = Backbone.Router.extend({
@@ -16,6 +18,7 @@ define([
 
         initialize: function() {
           console.log('initialize applicationRouter');
+          new AuthenticationRouter;
           new UserRouter;
           new EventRouter;
         },

@@ -18,11 +18,7 @@ define([
           console.log("UserRouter index");
           $("li.active").removeClass('active');
           $("#users-link").addClass('active');
-          var users = [
-            { 'username': 'jack' },
-            { 'username': 'dan' }
-          ];
-          var usersView = new UsersView(users);
+          var usersView = new UsersView();
           usersView.render();
         },
 

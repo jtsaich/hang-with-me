@@ -9,7 +9,7 @@ define([
     'use strict';
 
     var EventsCollection = Backbone.Collection.extend({
-        localStorage: new LocalStorage('backbone-hangwithme'),
+        localStorage: new LocalStorage('backbone-hangwithme-events'),
         model: EventModel
     });
 

@@ -13,7 +13,7 @@ define([
         },
 
         defaults: {
-          username: 'Name',
+          loginName: 'username',
           password: '',
           lastName: '',
           firstName: '',

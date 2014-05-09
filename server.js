@@ -24,8 +24,16 @@ var User = new mongoose.Schema({
 	gender: String,
 });
 
+var Event = new mongoose.Schema({
+  name: String,
+  activity: String,
+  time: String,
+  date: String
+});
+
 //Models
 var UserModel = mongoose.model( 'User', User );
+var EventModel = mongoose.model( 'Event', Event);
 
 // Configure server
 app.configure( function() {
@@ -73,7 +81,7 @@ app.get( '/api/users/:id', function( request, response ) {
 });
 
 //Insert a new user
-app.post( '/api/users', function( request, response ) {
+app.post( '/api/users/add', function( request, response ) {
 	var user = new UserModel({
 		releaseDate: request.body.releaseDate,
 		username: request.body.username,
@@ -133,6 +141,24 @@ app.delete( '/api/users/:id', function( request, response ) {
 				console.log( err );
 			}
 		});
+	});
+});
+
+//Insert a new user
+app.post( '/api/events/add', function( request, response ) {
+	var event = new EventModel({
+    name: "default",
+		date: request.body.date,
+		time: request.body.time,
+    activity: request.body.activity
+	});
+	event.save( function( err ) {
+		if( !err ) {
+			return console.log( 'created' );
+		} else {
+			return console.log( err );
+		}
+		return response.send( event );
 	});
 });
 

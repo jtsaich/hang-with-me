@@ -18,8 +18,26 @@ define([
 
         events: {},
 
-        initialize: function (users) {
-            this.collection = new UsersCollection(users);
+        initialize: function () {
+            console.log("UsersView...");
+            this.collection = new UsersCollection();
+            this.collection.fetch();
+            
+            /* Create temp fake users
+            var newUser = new UserModel({
+                loginName: 'dandanbang',
+                password: 'blah',
+                firstName: 'Daniel',
+                lastName: 'Chen',
+                email: 'dandanbang@gmail.com'
+            });
+            
+            this.collection.add(newUser);
+            newUser.save();
+            */
+
+            console.log('users colletion:', JSON.stringify(this.collection));
+            this.render();
         },
 
         render: function () {

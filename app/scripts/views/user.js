@@ -15,11 +15,17 @@ define([
 
         tagName: 'div',
 
-        events: {},
+        events: {
+            'click .user-show': 'renderUserShow'
+        },
 
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
             return this;
+        },
+
+        renderUserShow: function() {
+            console.log("renderUserShow...");
         }
     });
 

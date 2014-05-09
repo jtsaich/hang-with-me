@@ -5,8 +5,10 @@ define([
     'underscore',
     'backbone',
     'templates',
-    'models/event'
-], function ($, _, Backbone, JST, EventModel) {
+    'models/event',
+    'collections/user',
+    'models/user'
+], function ($, _, Backbone, JST, EventModel, UsersCollection, UserModel) {
     'use strict';
 
     var EventView = Backbone.View.extend({
@@ -19,6 +21,7 @@ define([
         events: {},
         
         render: function () {
+            
             this.$el.html(this.template(this.model.toJSON()));
             return this;
         }

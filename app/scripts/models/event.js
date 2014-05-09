@@ -9,7 +9,7 @@ define([
 
     var EventModel = Backbone.Model.extend({
         defaults: {
-          'name': 'default',
+          'user_id': '',
           'image_url': 'default',
           'activity': 'default',
           'time': 'default',
