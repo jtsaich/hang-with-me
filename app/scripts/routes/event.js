@@ -10,6 +10,7 @@ define([
 
     var EventRouter = Backbone.Router.extend({
         routes: {
+            '': 'index',
             'events': 'index',
             'events/add': 'create'
         },
@@ -18,11 +19,7 @@ define([
             console.log('eventsIndex');
             $("li.active").removeClass('active');
             $("#home-link").addClass('active');
-            var events = [
-              {'eventName': 'Coffee'},
-              {'eventName': 'Jogging'}
-            ];
-            var eventsView = new EventsView(events);
+            var eventsView = new EventsView();
             eventsView.render();
         },
 

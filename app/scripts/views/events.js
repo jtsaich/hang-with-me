@@ -17,8 +17,11 @@ define([
 
         events: {},
 
-        initialize: function (events) {
-            this.collection = new EventsCollection(events);
+        initialize: function () {
+            this.collection = new EventsCollection();
+            this.collection.fetch();
+            console.log('initialize EventsView...');
+            console.log('collection: ' + JSON.stringify(this.collection.toJSON()));
         },
 
         render: function () {

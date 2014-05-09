@@ -15,10 +15,9 @@ define([
         },
 
         initialize: function() {
+          console.log('initialize applicationRouter');
           new UserRouter;
           new EventRouter;
-          var appView = new ApplicationView({model: new ApplicationModel});
-          appView.render();
         },
     });
 

@@ -14,6 +14,7 @@ require.config({
         underscore: '../bower_components/underscore/underscore',
         bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap',
         handlebars: '../bower_compenents/handlebars/handlebars',
+        localStorage: '../bower_components/backbone.localStorage/backbone.localStorage'
     }
 });
 
@@ -21,8 +22,11 @@ require([
     'backbone', 'routes/application'
 ], function (Backbone, ApplicationRouter) {
     var appRouter = new ApplicationRouter(); 
+    Backbone.history.start();
+
+    /*
     Backbone.history.start({pushState: true});
-  
+    
     $(document).on('click', 'a:not([data-bypass])', function(e) {
       var href = $(this).attr('href');
       var protocol = this.protocol + '//';
@@ -33,5 +37,5 @@ require([
           Backbone.history.navigate(href, true);
       }
     });
-    
+    */
 });

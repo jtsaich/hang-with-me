@@ -11,7 +11,6 @@ define([
 ], function ($, _, Backbone, JST, EventModel, EventsCollection) {
     'use strict';
 
-
     var EventCreateView = Backbone.View.extend({
         template: JST['app/scripts/templates/eventCreate.ejs'],
 
@@ -23,10 +22,14 @@ define([
 
         events: {
             'click .activity-form-group li': 'toggleActivity',
-            'click #add': 'addEvent'
+            'click #add': 'addEvent',
         },
 
         initialize: function () {
+            this.collection = new EventsCollection();
+            this.collection.fetch();
+            console.log('initialize EventCreateView...');
+            console.log('collection: after init' + JSON.stringify(this.collection.toJSON()));
         },
 
         render: function () {
@@ -49,9 +52,12 @@ define([
             } );
 
             formData.activity = $('#activity-btn').val();
+            var event = new EventModel(formData);
+            this.collection.add(event);
+            event.save();
+            console.log('collection after add: ' + JSON.stringify(this.collection.toJSON()));
+            Backbone.history.navigate('events', true);
 
-            console.log(JSON.stringify(formData));
-            (new EventsCollection()).add(new EventModel(formData));
         },
 
         toggleActivity: function(e) {
