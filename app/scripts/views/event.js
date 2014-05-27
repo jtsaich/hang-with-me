@@ -6,7 +6,7 @@ define([
     'backbone',
     'templates',
     'models/event',
-    'collections/user',
+    'collections/users',
     'models/user'
 ], function ($, _, Backbone, JST, EventModel, UsersCollection, UserModel) {
     'use strict';

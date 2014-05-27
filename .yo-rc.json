@@ -20,6 +20,6 @@
     "testFramework": "mocha",
     "templateFramework": "lodash",
     "compassBootstrap": true,
-    "includeRequireJS": true
+    "includeRequireJS": false
   }
 }
