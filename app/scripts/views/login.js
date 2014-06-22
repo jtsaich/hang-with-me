@@ -4,7 +4,8 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'templates'
+    'templates',
+    'parse'
 ], function ($, _, Backbone, JST) {
     'use strict';
 
@@ -20,6 +21,8 @@ define([
         initialize: function () {
             console.log('view page');
             //this.listenTo(this.model, 'change', this.render);
+            Parse.initialize("xuROB68PlE33z0TszYi0neUHZpfjeD9S9pjsipbX", "xGDkvNETnceI3fAexHfcZAsZ7A23FkXa2h3aIsH2");
+            
         },
 
        

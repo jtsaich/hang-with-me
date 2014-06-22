@@ -14,7 +14,8 @@ require.config({
         underscore: '../bower_components/underscore/underscore',
         bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap',
         handlebars: '../bower_compenents/handlebars/handlebars',
-        localStorage: '../bower_components/backbone.localStorage/backbone.localStorage'
+        localStorage: '../bower_components/backbone.localStorage/backbone.localStorage',
+        parse: '//www.parsecdn.com/js/parse-1.2.18.min.js'
     }
 });
 
