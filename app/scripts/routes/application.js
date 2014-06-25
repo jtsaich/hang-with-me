@@ -19,6 +19,7 @@ define([
 
         initialize: function() {
           console.log('initialize applicationRouter');
+          //alert("hihi");
           new AuthenticationRouter;
           new UserRouter;
           new EventRouter;

@@ -5,7 +5,7 @@ define([
     'underscore',
     'backbone',
     'templates',
-    'parse'
+    //'parse'
 ], function ($, _, Backbone, JST) {
     'use strict';
 
@@ -16,13 +16,36 @@ define([
         el: $('#main'),
 
         className: '',
-        events: {},
+        events: {
+            'click #fb_button': 'checkLoginState',
+            //'click fb:login-button': 'checkLoginState',
+        },
 
         initialize: function () {
             console.log('view page');
-            //this.listenTo(this.model, 'change', this.render);
-            Parse.initialize("xuROB68PlE33z0TszYi0neUHZpfjeD9S9pjsipbX", "xGDkvNETnceI3fAexHfcZAsZ7A23FkXa2h3aIsH2");
-            
+            window.fbAsyncInit = function() {
+                console.log('fbAsyncInit');
+                FB.init({
+                  appId      : '691023744289828',
+                  cookie     : true,  // enable cookies to allow the server to access 
+                                // the session
+                  xfbml      : true,  // parse social plugins on this page
+                  version    : 'v2.0' // use version 2.0
+                });
+
+                FB.getLoginStatus(function(response) {
+                  this.statusChangeCallback(response);
+                });
+            };
+            // Load the SDK asynchronously
+            (function(d, s, id){
+                 var js, fjs = d.getElementsByTagName(s)[0];
+                 if (d.getElementById(id)) {return;}
+                 js = d.createElement(s); js.id = id;
+                 js.src = "http://connect.facebook.net/en_US/sdk.js";
+                 fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
         },
 
        
@@ -31,49 +54,73 @@ define([
             this.$el.html(this.template());
             return this;
         },
-     
+
+        // fbLogin: function(e) {
+        //     alert("fbLogin");
+        // }
+
+        checkLoginState: function (e) {
+            console.log("fbLogin");
+            FB.getLoginStatus(function(response) {
+                console.log("check status");
+                this.statusChangeCallback(response);
+            });
+        },
+        statusChangeCallback: function(response){
+            console.log('statusChangeCallback');
+            console.log(response);
+            // The response object is returned with a status field that lets the
+            // app know the current login status of the person.
+            // Full docs on the response object can be found in the documentation
+            // for FB.getLoginStatus().
+            if (response.status === 'connected') {
+              // Logged into your app and Facebook.
+              testAPI();
+            } else if (response.status === 'not_authorized') {
+              // The person is logged into Facebook, but not your app.
+              document.getElementById('status').innerHTML = 'Please log ' +
+                'into this app.';
+            } else {
+              // The person is not logged into Facebook, so we're not sure if
+              // they are logged into this app or not.
+              document.getElementById('status').innerHTML = 'Please log ' +
+                'into Facebook.';
+            }
+        },
+
+        testAPI: function() {
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', function(response) {
+              console.log(response);
+              console.log('Successful login for: ' + response.name);
+              var username = response.name;
+              var password = response.name;
+              var user = new Parse.User();
+              user.set("username", username);
+              user.set("password", password);
+              //user.set("email", "email@example.com");
+               
+              // other fields can be set just like with Parse.Object
+              //user.set("phone", "415-392-0202");
+               
+              user.signUp(null, {
+                success: function(user) {
+                  alert("success");
+                },
+                error: function(user, error) {
+                  // Show the error message somewhere and let the user try again.
+                  alert("Error: " + error.code + " " + error.message);
+                }
+            });
+              
+              document.getElementById('status').innerHTML =
+                'Thanks for logging in, ' + response.name + '!';
+            });
+        }
     });
     // window.activeSession = new SessionModel();
     // console.log('authorized after create (should be false):', window.activeSession.isAuthorized());
     return LoginView;
 });
 
-// (function (d) {
-//         var js, id = 'facebook-jssdk',
-//           ref = d.getElementsByTagName('script')[0];
-//         if (d.getElementById(id)) {
-//           return;
-//         }
-//         js = d.createElement('script');
-//         js.id = id;
-//         js.async = true;
-//         js.src = "//connect.facebook.net/en_US/all.js";
-//         ref.parentNode.insertBefore(js, ref);
-//       }(document));
 
-
-//       window.fbAsyncInit = function () {
-//         FB.init({
-//           appId: '691023744289828',
-//           status: true, // check login status
-//           cookie: true, // enable cookies to allow the server to access the session
-//           xfbml: true // parse XFBML
-//         });
-
-//         FB.getLoginStatus(function (response) {
-//           console.log('FB resp:', response, response.status);
-//           /* Bind event handler only after Facebook SDK had a nice cup of coffee */
-//           $('#btnLogin').on('click', function () {
-//             window.activeSession.login({
-//               before: function () {
-//                 console.log('before login()')
-//               },
-//               after: function () {
-//                 console.log('after login()')
-//               }
-//             });
-//           });
-//         });
-
-//       };
-//   }

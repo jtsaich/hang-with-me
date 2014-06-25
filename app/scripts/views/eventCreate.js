@@ -38,6 +38,7 @@ define([
         },
 
         addEvent: function (e) {
+            //debugger;
             e.preventDefault();
             var formData = {};
 
