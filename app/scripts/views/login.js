@@ -18,6 +18,7 @@ define([
         className: '',
         events: {
             'click #fb_button': 'checkLoginState',
+            'click #register_new_account': 'signUp',
             //'click fb:login-button': 'checkLoginState',
         },
 
@@ -98,23 +99,47 @@ define([
               var user = new Parse.User();
               user.set("username", username);
               user.set("password", password);
-              //user.set("email", "email@example.com");
-               
-              // other fields can be set just like with Parse.Object
-              //user.set("phone", "415-392-0202");
+
                
               user.signUp(null, {
                 success: function(user) {
                   alert("success");
                 },
                 error: function(user, error) {
-                  // Show the error message somewhere and let the user try again.
                   alert("Error: " + error.code + " " + error.message);
                 }
             });
               
               document.getElementById('status').innerHTML =
                 'Thanks for logging in, ' + response.name + '!';
+            });
+        },
+
+        signUp: function(e){
+            e.preventDefault();
+            var form = $("form")[0];
+            var username = form.username.value;
+            var password = form.password.value;
+            var phone = form.phone.value;
+            var email = form.email.value;
+
+            console.log("Username: " + username + " Password: " + password + " email:" + email + " phone:" + phone);
+            alert("Username: " + username + " Password: " + password);
+
+            var user = new Parse.User();
+            user.set("username", username);
+            user.set("password", password);
+            user.set("email", email);
+            user.set("phone", phone);
+             
+            user.signUp(null, {
+              success: function(user) {
+                alert("success");
+              },
+              error: function(user, error) {
+                // Show the error message somewhere and let the user try again.
+                alert("Error: " + error.code + " " + error.message);
+              }
             });
         }
     });
